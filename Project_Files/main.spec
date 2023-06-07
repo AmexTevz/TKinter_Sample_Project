@@ -6,7 +6,7 @@ block_cipher = None
 
 a = Analysis(
     ['main.py'],
-    pathex=['/Users/amirantevzadze/Desktop/Tkinter/Program_Files'],
+    pathex=['/path/to/the/files/directory'],
     binaries=[],
     datas=[],
     hiddenimports=[],
