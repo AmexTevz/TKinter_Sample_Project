@@ -24,9 +24,9 @@ def unlock(desc=None):
     info.config(state='disabled')
 
 
-def button(title, chapter, header, w=None, h=None, background=None):
+def button(title, chapter, head, w=None, h=None, background=None):
     Button(text=title, highlightbackground=YELLOW, width=w, height=h, fg=background, highlightthickness=0,
-           command=lambda: reset(chapter, header)).pack(side=LEFT, padx=50)
+           command=lambda: reset(chapter, head)).pack(side=LEFT, padx=50)
 
 
 def choice(*args):
