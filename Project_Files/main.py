@@ -7,6 +7,8 @@ YELLOW = "#f7f5dd"
 back_color = '#B20600'
 FONT_NAME = "Courier"
 
+def add_message():
+    info.insert(END, '\n\n\n\t\t\t\tHit any button for more information', 'color')
 
 def reset(text_version, header):
     info.config(state='normal')
@@ -94,12 +96,6 @@ info.insert(END, text.summary)
 info.tag_config('color', foreground=back_color)
 info['wrap'] = WORD
 info.get("1.0", END)
-
-
-
-def add_message():
-    info.insert(END, '\n\n\n\t\t\t\tHit any button for more information', 'color')
-
 
 choice(clicked)
 
