@@ -3,53 +3,44 @@ from information import Information
 
 text = Information()
 
-PINK = "#e2979c"
-RED = "#e7305b"
-GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 back_color = '#B20600'
 FONT_NAME = "Courier"
-font_2 = 'Rage Italic'
 
 
-def reset(reset_text, header):
-    info.config(state='normal')
-    info.delete('1.0', END)
-    info.insert(END, reset_text)
-    label_text['text'] = header
-    description['text'] = 'General'
-    add_message()
-    info.config(state='disabled')
-
-
-def charge1(text_version, desc):
+def reset(text_version, header):
     info.config(state='normal')
     info.delete('1.0', END)
     info.insert(END, text_version)
-    info['wrap'] = WORD
-    info.config(fg='black')
-    info.get("1.0", END)
+    description['text'] = header
     info.config(state='disabled')
-    description['text'] = desc
+
+
+def unlock(desc=None):
+    info.config(state='normal')
+    label_text['text'] = desc
+    add_message()
+    description['text'] = 'General'
+    info.config(state='disabled')
 
 
 def button(title, chapter, header, w=None, h=None, background=None):
     Button(text=title, highlightbackground=YELLOW, width=w, height=h, fg=background, highlightthickness=0,
-           command=lambda: charge1(chapter, header)).pack(side=LEFT, padx=50)
+           command=lambda: reset(chapter, header)).pack(side=LEFT, padx=50)
 
 
 def choice(*args):
     if clicked.get() == 'USB-C':
-        reset(text.usb_1, 'USB-C')
-        add_message()
+        reset(text.usb_1, '')
+        unlock('USB Standards')
         for i in window.winfo_children()[5:]:
             i.forget()
 
-        button('Overview', text.usb_2, 'overview', 8)
+        button('Overview', text.usb_2, 'Overview', 8)
 
         button('PD', text.power_delivery, 'Power Delivery', 8)
 
-        button('Rest', text.usb_1, 'USB-C', 5, 3, back_color)
+        button('Reset', text.usb_1, 'General', 5, 3, back_color)
 
         button('VO', text.video_output, 'Video Output', 8)
 
@@ -57,7 +48,8 @@ def choice(*args):
 
     else:
         if clicked.get() == 'Charging':
-            reset(text.summary, 'Charging Standards')
+            reset(text.summary, '')
+            unlock('Charging Standards')
             for i in window.winfo_children()[5:]:
                 i.forget()
 
@@ -65,7 +57,7 @@ def choice(*args):
 
             button('QC 3.0', text.charge_3, 'Quick Charge 3.0', 8)
 
-            button('Reset', text.summary, 'Charging Standards', 5, 3, back_color)
+            button('Reset', text.summary, 'General', 5, 3, back_color)
 
             button('QC 4.0', text.charge_4, 'Quick Charge 4.0', 8)
 
@@ -104,11 +96,10 @@ info['wrap'] = WORD
 info.get("1.0", END)
 
 
+
 def add_message():
     info.insert(END, '\n\n\n\t\t\t\tHit any button for more information', 'color')
 
-
-add_message()
 
 choice(clicked)
 
